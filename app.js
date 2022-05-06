@@ -5,7 +5,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const fs = require("fs");
 const app = express();
-const port = 3000;
+const port = 3060;
 const indexRouter = require("./routers/index");
 
 connect();
