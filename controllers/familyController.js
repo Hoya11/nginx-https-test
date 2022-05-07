@@ -10,7 +10,7 @@ const PhotoAlbum = require('../schemas/photoAlbum');
 const VoiceAlbum = require('../schemas/voiceAlbum');
 const VoiceFile = require('../schemas/voiceFile');
 const Like = require('../schemas/like');
-const MissionMember = require('../schemas/missionMember');
+// const MissionMember = require('../schemas/missionMember');
 const MissionChk = require('../schemas/missionChk');
 const badge = require('../schemas/badge');
 
@@ -238,7 +238,7 @@ const deleteFamily = async (req, res) => {
     await VoiceAlbum.deleteOne({ _id: familyId });
     await VoiceFile.deleteOne({ _id: familyId });
     await Like.deleteOne({ _id: familyId });
-    await MissionMember.deleteOne({ _id: familyId });
+    // await MissionMember.deleteOne({ _id: familyId });
     await MissionChk.deleteOne({ _id: familyId });
 
     res.status(200).json({ msg: '가족이 삭제됐습니다.' });
