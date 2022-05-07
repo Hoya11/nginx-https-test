@@ -1,27 +1,25 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-// const Middleware = require('../middlewares/authMiddleware');
-const upload = require('../middlewares/upload')
-// const voiceUpload = upload.single('voiceFile')
-// const { voiceFile } = require('../controllers/voiceController')
+const upload = require('../middlewares/upload');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const {
-    createVoiceFile,
-    getVoiceFile,
-    deleteVoiceFile,
-} = require('../controllers/voiceFileController')
-
-
+  createVoiceFile,
+  getVoiceFile,
+  deleteVoiceFile,
+} = require('../controllers/voiceFileController');
 
 //음성메세지 생성 API
-router.post('/:familyId/:voiceAlbumId', upload.single("voiceFile"), createVoiceFile)
+router.post(
+  '/:familyId/:voiceAlbumId', authMiddleware,
+  upload.single('voiceFile'),
+  createVoiceFile
+);
 
 //음성메세지 조회 API
-router.get('/:voiceAlbumId', getVoiceFile)
+router.get('/:voiceAlbumId', authMiddleware, getVoiceFile);
 
 //음성메세지 삭제 API
-router.delete('/:voiceFileId', deleteVoiceFile)
-
-
+router.delete('/:voiceFileId', authMiddleware, deleteVoiceFile);
 
 module.exports = router;
