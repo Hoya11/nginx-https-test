@@ -5,7 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const fs = require('fs');
-const port = 3000;
+const port = 3060;
 const app = express();
 
 connect();

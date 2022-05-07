@@ -2,7 +2,7 @@ const User = require('../schemas/user');
 const Family = require('../schemas/family');
 const FamilyMember = require('../schemas/familyMember');
 const Mission = require('../schemas/mission');
-const MissionMember = require('../schemas/missionmember');
+const missionMember = require('../schemas/missionMember');
 const MissionChk = require('../schemas/missionChk');
 const Badge = require('../schemas/badge');
 const Photo = require('../schemas/photo');
@@ -62,7 +62,7 @@ const getMainPage = async (req, res) => {
     // 각 미션의 멤버 리스트 추출 후 달성 완료된 미션 수 계산
     let completedMission = 0;
     for (let mission of thisMonthMissionList) {
-      const missionMembers = await MissionMember.find({
+      const missionMembers = await missionMember.find({
         missionId: mission.missionId,
       });
       const completedMembers = await MissionChk.find({

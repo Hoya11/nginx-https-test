@@ -10,7 +10,7 @@ const PhotoAlbum = require('../schemas/photoAlbum');
 const VoiceAlbum = require('../schemas/voiceAlbum');
 const VoiceFile = require('../schemas/voiceFile');
 const Like = require('../schemas/like');
-const MissionMember = require('../schemas/missionMember');
+const missionMember = require('../schemas/missionMember');
 const MissionChk = require('../schemas/missionChk');
 const badge = require('../schemas/badge');
 
@@ -217,7 +217,7 @@ const editFamilyMember = async (req, res) => {
 //가족 삭제 API
 //api 테스트 성공
 //familyId 로 연관된 갤러리, 보이스, 미션 등등이 다 삭제되게 하기.
-//like, missionChk, MissionMember 세 개 다 familyId 따로 추가 예정.
+//like, missionChk, missionMember 세 개 다 familyId 따로 추가 예정.
 //user, randomMsg 데이터는 삭제 제외.
 const deleteFamily = async (req, res) => {
   try {
@@ -238,7 +238,7 @@ const deleteFamily = async (req, res) => {
     await VoiceAlbum.deleteOne({ _id: familyId });
     await VoiceFile.deleteOne({ _id: familyId });
     await Like.deleteOne({ _id: familyId });
-    await MissionMember.deleteOne({ _id: familyId });
+    await missionMember.deleteOne({ _id: familyId });
     await MissionChk.deleteOne({ _id: familyId });
 
     res.status(200).json({ msg: '가족이 삭제됐습니다.' });

@@ -1,6 +1,6 @@
 const FamilyMember = require('../schemas/familyMember');
 const Mission = require('../schemas/mission');
-const MissionMember = require('../schemas/missionmember');
+const missionMember = require('../schemas/missionMember');
 const MissionChk = require('../schemas/missionChk');
 const Badge = require('../schemas/badge');
 const Photo = require('../schemas/photo');
@@ -35,7 +35,7 @@ const postMission = async (req, res) => {
         const profileImg = missionMember.profileImg;
         // 공백 체크
         if (missionMember) {
-          await MissionMember.create({
+          await missionMember.create({
             familyId,
             missionId: createdMission.missionId,
             familyMemberId,
@@ -87,7 +87,7 @@ const completeMission = async (req, res) => {
       });
       let myMissionChk = true;
       //전체미션 체크
-      const missionMember = await MissionMember.find({ missionId });
+      const missionMember = await missionMember.find({ missionId });
       const completedMember = await MissionChk.find({ missionId });
       if (missionMember.length === completedMember.length) {
         familyMissionChk = true;
@@ -132,7 +132,7 @@ const getMission = async (req, res) => {
     }
     // 각 미션의 멤버 리스트 추출
     for (let mission of thisMonthMissionList) {
-      const missionMembers = await MissionMember.find({
+      const missionMembers = await missionMember.find({
         missionId: mission.missionId,
       });
       const completedMembers = await MissionChk.find({
@@ -270,7 +270,7 @@ const getPastMission = async (req, res) => {
     }
     // 각 미션의 멤버 리스트 추출
     for (let mission of pastMissionList) {
-      const missionMembers = await MissionMember.find({
+      const missionMembers = await missionMember.find({
         missionId: mission.missionId,
       });
       const completedMembers = await MissionChk.find({
@@ -356,7 +356,7 @@ const deleteMission = async (req, res) => {
     // 미션, 미션멤버, 미션체크 모두 삭제
     if (existMission) {
       await Mission.deleteOne({ _id: missionId });
-      await MissionMember.deleteMany({ _id: missionId });
+      await missionMember.deleteMany({ _id: missionId });
       await MissionChk.deleteMany({ _id: missionId });
       // 이번달 전체 미션 수 추출
       const thisMonth = new Date()
@@ -376,7 +376,7 @@ const deleteMission = async (req, res) => {
           const completedMembers = await MissionChk.find({
             missionId: mission.missionId,
           });
-          const missionMembers = await MissionMember.find({
+          const missionMembers = await missionMember.find({
             missionId: mission.missionId,
           });
           if (missionMembers.length === completedMembers.length) {
