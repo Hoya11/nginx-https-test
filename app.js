@@ -19,7 +19,7 @@ app.use(morgan('tiny')); // 서버 요청 모니터링 미들웨어
 
 // 라우터 연결
 app.use(indexRouter);
-
+//머지 테스트용
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   res.sendStatus(404);
